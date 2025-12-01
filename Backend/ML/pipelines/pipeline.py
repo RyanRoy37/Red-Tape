@@ -1,7 +1,7 @@
-from extractor import extract_from_api
+from Backend.ML.feature_extractors.extractor import extract_from_api
 from preprocessing import transform
 from loader import load_to_postgres
-from model_predict import predict
+from Backend.ML.models.url_model.model_predict import predict
 import asyncio
 
 async def etl(api_url, conn_string):
@@ -13,5 +13,5 @@ async def etl(api_url, conn_string):
     print("Fed to model")
     predicted_df = predict(feature_df)
     print("Inserted results into db")
-    asyncio.create_task(load_to_postgres(predicted_df, "url_predictions", conn_string))
+    asyncio.create_task(load_to_postgres(predicted_df, "", conn_string))
     return result

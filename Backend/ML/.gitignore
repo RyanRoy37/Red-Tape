@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+env/
+*.env
+
+# Model files
+*.pkl
+*.joblib
+
+# Credentials
+config.json
+secret.json
+
+# OS junk
+.DS_Store
+
+# Logs
+logs/
+*.log

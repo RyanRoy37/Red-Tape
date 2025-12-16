@@ -10,11 +10,6 @@ import requests
 from datetime import datetime
 import math
 
-
-# ============================================================
-# ---------------- BASIC FEATURE FUNCTIONS -------------------
-# ============================================================
-
 def Querylength(url): return len(urlparse(url).query)
 
 def domain_token_count(url):
@@ -107,11 +102,6 @@ def URLQueries_variable(url): return len(parse_qs(urlparse(url).query))
 def url_shortened(url): return int(any(s in url for s in ["bit.ly", "tinyurl", "goo.gl"]))
 def email_in_url(url): return int("@" in url)
 
-
-# =========================
-# -------- ENTROPY --------
-# =========================
-
 def entropy(s):
     if not s:
         return 0
@@ -121,11 +111,7 @@ def entropy(s):
 def Entropy_URL(url): return entropy(url)
 def Entropy_Domain(url): return entropy(urlparse(url).netloc)
 
-
-# ============================================================
-# ---------------- ADVANCED FEATURES (SLOW) ------------------
-# ============================================================
-
+"""
 def time_domain_activation(url):
     try:
         domain = urlparse(url).netloc.replace("www.", "")
@@ -204,12 +190,8 @@ def time_response(url):
         requests.get(url, timeout=5)
         return int((datetime.now() - start).total_seconds() * 1000)
     except:
-        return 0
+        return 0"""
 
-
-# ============================================================
-# ---------------- FEATURE GROUPS ----------------------------
-# ============================================================
 
 BASIC_FEATURES = [
     Querylength, domain_token_count, path_token_count,
@@ -228,29 +210,9 @@ BASIC_FEATURES = [
     Entropy_URL, Entropy_Domain
 ]
 
-ADVANCED_FEATURES = [
-    time_domain_activation, time_domain_expiration,
-    ttl_hostname, asn_ip, qty_ip_resolved,
-    qty_nameservers, qty_mx_servers,
-    domain_spf, tls_ssl_certificate, time_response
-]
-
-
-# ============================================================
-# ---------------- CENTRAL EXTRACTORS -------------------------
-# ============================================================
-
 def extract_basic_features(url):
     print(f"Extracting basic features for URL: {url}")
     return [f(url) for f in BASIC_FEATURES]
-
-def extract_advanced_features(url):
-    return extract_basic_features(url) + [f(url) for f in ADVANCED_FEATURES]
-
-
-# ============================================================
-# ---------------- CSV PIPELINES ------------------------------
-# ============================================================
 
 def process_csv_basic(input_csv, output_csv):
     df = pd.read_csv(input_csv)
@@ -260,13 +222,5 @@ def process_csv_basic(input_csv, output_csv):
     out.to_csv(output_csv, index=False)
     print(f"[BASIC] Finished! Saved to {output_csv}")
 
-def process_csv_advanced(input_csv, output_csv):
-    df = pd.read_csv(input_csv)
-    rows = [extract_advanced_features(u) for u in df['url']]
-    cols = [f.__name__ for f in BASIC_FEATURES + ADVANCED_FEATURES]
-    out = pd.DataFrame(rows, columns=cols)
-    out['URL_Type_obf_Type'] = df['status']
-    out.to_csv(output_csv, index=False)
-    print(f"[BASIC] Finished! Saved to {output_csv}")
 
 process_csv_basic("data/new_data_urls.csv", "data/processed_features.csv")

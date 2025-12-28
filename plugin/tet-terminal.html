@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test Retro Security Terminal</title>
+  <link rel="stylesheet" href="terminal/terminal.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 40px;
+      background: #f0f0f0;
+    }
+    .test-controls {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .subtitle {
+      color: #666;
+      margin-bottom: 30px;
+    }
+    .test-section {
+      margin: 20px 0;
+      padding: 20px;
+      background: #f9f9f9;
+      border-left: 4px solid #ff0000;
+    }
+    .test-section h3 {
+      margin-top: 0;
+      color: #ff0000;
+    }
+    button {
+      padding: 12px 24px;
+      margin: 5px;
+      font-size: 14px;
+      cursor: pointer;
+      border: 2px solid #ff0000;
+      background: white;
+      color: #ff0000;
+      transition: all 0.2s;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #ff0000;
+      color: white;
+    }
+    input {
+      padding: 10px;
+      width: 100%;
+      margin: 10px 0;
+      border: 2px solid #ddd;
+      font-size: 14px;
+    }
+    .code-block {
+      background: #1a1a1a;
+      color: #00ff00;
+      padding: 15px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      overflow-x: auto;
+      margin: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="test-controls">
+    <h1>🔴 Retro Security Terminal - Test Page</h1>
+    <p class="subtitle">Test the terminal overlay with different scenarios</p>
+    
+    <div class="test-section">
+      <h3>Test 1: Loading State</h3>
+      <p>Shows the scanning animation and ASCII art</p>
+      <input type="text" id="url-loading" value="https://example.com" placeholder="Enter URL">
+      <button onclick="testLoading()">Show Loading Screen</button>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test 2: Safe Website Result</h3>
+      <p>Displays a safe site verdict with low risk score</p>
+      <button onclick="testSafeResult()">Show Safe Result</button>
+      <div class="code-block">
+{
+  "url": "https://google.com",
+  "is_phishing": false,
+  "risk_score": 5,
+  "confidence": "High confidence - legitimate site",
+  "explanations": [
+    "Domain has valid SSL certificate",
+    "Domain age exceeds 10 years",
+    "No suspicious redirects detected"
+  ]
+}
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test 3: Phishing Detection</h3>
+      <p>Displays a phishing warning with high risk score</p>
+      <button onclick="testPhishingResult()">Show Phishing Alert</button>
+      <div class="code-block">
+{
+  "url": "https://paypa1-secure-login.com",
+  "is_phishing": true,
+  "risk_score": 95,
+  "confidence": "Very high confidence - phishing detected",
+  "explanations": [
+    "Domain mimics legitimate brand (PayPal)",
+    "Recently registered domain (2 days old)",
+    "Suspicious character substitution detected",
+    "No valid SSL certificate",
+    "Multiple redirect chains detected"
+  ]
+}
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test 4: Medium Risk Site</h3>
+      <p>Shows a moderate risk warning</p>
+      <button onclick="testMediumRisk()">Show Medium Risk</button>
+      <div class="code-block">
+{
+  "url": "https://unknown-shop-deals.net",
+  "is_phishing": false,
+  "risk_score": 55,
+  "confidence": "Moderate confidence",
+  "explanations": [
+    "New domain registration (15 days)",
+    "Limited online reputation data",
+    "SSL certificate valid but recently issued"
+  ]
+}
+      </div>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test 5: Connection Error</h3>
+      <p>Shows error when backend is unavailable</p>
+      <button onclick="testError()">Show Error State</button>
+    </div>
+    
+    <div class="test-section">
+      <h3>Test 6: Custom Scenario</h3>
+      <p>Test with your own JSON data</p>
+      <textarea id="custom-json" rows="8" style="width: 100%; font-family: monospace; padding: 10px;">
+{
+  "url": "https://your-test-url.com",
+  "is_phishing": false,
+  "risk_score": 25,
+  "confidence": "Custom test scenario",
+  "explanations": [
+    "Your custom reason 1",
+    "Your custom reason 2"
+  ]
+}
+      </textarea>
+      <button onclick="testCustom()">Show Custom Result</button>
+    </div>
+  </div>
+  
+  <!-- Include terminal HTML -->
+  <div id="retro-security-terminal" style="display: none;">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span class="terminal-title">[ SECURITY SCAN IN PROGRESS ]</span>
+        <button id="terminal-close" class="terminal-btn-close">✕</button>
+      </div>
+      
+      <div class="terminal-body">
+        <div class="terminal-section">
+          <div class="terminal-label">TARGET</div>
+          <div class="terminal-url" id="terminal-url">Loading...</div>
+        </div>
+        
+        <div class="terminal-section" id="loading-section">
+          <div class="scanner-container">
+            <pre class="scanner-art">
+╔════════════════════════════════════╗
+║  ANALYZING THREAT SIGNATURES...   ║
+║                                    ║
+║    ▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░    ║
+║                                    ║
+║  CHECKING DOMAIN REPUTATION...    ║
+║  VERIFYING SSL CERTIFICATES...    ║
+║  SCANNING FOR ANOMALIES...        ║
+╚════════════════════════════════════╝
+            </pre>
+          </div>
+          <div class="terminal-status">STAND BY...</div>
+        </div>
+        
+        <div id="results-section" style="display: none;">
+          <div class="terminal-section">
+            <div class="terminal-label">VERDICT</div>
+            <div class="terminal-verdict" id="terminal-verdict">ANALYZING...</div>
+          </div>
+          
+          <div class="terminal-section">
+            <div class="terminal-label">RISK ASSESSMENT</div>
+            <div class="terminal-risk">
+              <span class="risk-score" id="risk-score">--</span>
+              <span class="risk-level" id="risk-level">UNKNOWN</span>
+            </div>
+          </div>
+          
+          <div class="terminal-section">
+            <div class="terminal-label">CONFIDENCE</div>
+            <div class="terminal-confidence" id="terminal-confidence">--</div>
+          </div>
+          
+          <div class="terminal-section" id="explanations-section">
+            <div class="terminal-label">ANALYSIS</div>
+            <div id="terminal-explanations"></div>
+          </div>
+          
+          <div class="terminal-note" id="cache-note" style="display: none;">
+            Result cached for faster future access
+          </div>
+        </div>
+        
+        <div id="error-section" style="display: none;">
+          <div class="terminal-section">
+            <div class="terminal-label">ERROR</div>
+            <div class="terminal-error" id="error-message">SYSTEM ERROR</div>
+          </div>
+          <div class="terminal-section" id="error-details"></div>
+        </div>
+        
+        <div class="terminal-actions" id="terminal-actions" style="display: none;">
+          <button id="terminal-goback" class="terminal-btn btn-primary" style="display: none;">
+            GO BACK
+          </button>
+          <button id="terminal-proceed" class="terminal-btn btn-primary">
+            CONTINUE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="terminal/terminal.js"></script>
+  <script>
+    let terminal;
+    
+    // Initialize terminal when page loads
+    window.addEventListener('DOMContentLoaded', () => {
+      terminal = new SecurityTerminal();
+      
+      // Listen for messages from terminal
+      window.addEventListener('message', (event) => {
+        if (event.data.action === 'goBack') {
+          console.log('Go back clicked');
+        }
+        if (event.data.action === 'terminalClosed') {
+          console.log('Terminal closed');
+        }
+      });
+    });
+    
+    function testLoading() {
+      const url = document.getElementById('url-loading').value;
+      window.postMessage({
+        action: 'showLoading',
+        url: url
+      }, '*');
+    }
+    
+    function testSafeResult() {
+      window.postMessage({
+        action: 'showResult',
+        result: {
+          url: "https://google.com",
+          is_phishing: false,
+          risk_score: 5,
+          confidence: "High confidence - legitimate site",
+          explanations: [
+            "Domain has valid SSL certificate",
+            "Domain age exceeds 10 years",
+            "No suspicious redirects detected"
+          ]
+        }
+      }, '*');
+    }
+    
+    function testPhishingResult() {
+      window.postMessage({
+        action: 'showResult',
+        result: {
+          url: "https://paypa1-secure-login.com",
+          is_phishing: true,
+          risk_score: 95,
+          confidence: "Very high confidence - phishing detected",
+          explanations: [
+            "Domain mimics legitimate brand (PayPal)",
+            "Recently registered domain (2 days old)",
+            "Suspicious character substitution detected",
+            "No valid SSL certificate",
+            "Multiple redirect chains detected"
+          ]
+        }
+      }, '*');
+    }
+    
+    function testMediumRisk() {
+      window.postMessage({
+        action: 'showResult',
+        result: {
+          url: "https://unknown-shop-deals.net",
+          is_phishing: false,
+          risk_score: 55,
+          confidence: "Moderate confidence",
+          explanations: [
+            "New domain registration (15 days)",
+            "Limited online reputation data",
+            "SSL certificate valid but recently issued"
+          ]
+        }
+      }, '*');
+    }
+    
+    function testError() {
+      window.postMessage({
+        action: 'showError',
+        error: 'CONNECTION_FAILED'
+      }, '*');
+    }
+    
+    function testCustom() {
+      try {
+        const jsonText = document.getElementById('custom-json').value;
+        const data = JSON.parse(jsonText);
+        window.postMessage({
+          action: 'showResult',
+          result: data
+        }, '*');
+      } catch (error) {
+        alert('Invalid JSON: ' + error.message);
+      }
+    }
+  </script>
+</body>
+</html>

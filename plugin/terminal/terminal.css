@@ -1,0 +1,365 @@
+/* Retro Security Terminal Styles */
+/* Red and white color scheme with pixelated terminal aesthetic */
+
+#retro-security-terminal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.95);
+  z-index: 999999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', 'Consolas', monospace;
+  animation: terminalFadeIn 0.3s ease-out;
+}
+
+@keyframes terminalFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.terminal-window {
+  background: #1a1a1a;
+  border: 4px solid #ff0000;
+  box-shadow: 
+    0 0 20px rgba(255, 0, 0, 0.5),
+    inset 0 0 50px rgba(255, 0, 0, 0.1);
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  animation: terminalSlideIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes terminalSlideIn {
+  from {
+    transform: scale(0.8) translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.terminal-header {
+  background: #ff0000;
+  color: #ffffff;
+  padding: 12px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #cc0000;
+  font-weight: bold;
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 0 #000000;
+}
+
+.terminal-title {
+  font-size: 14px;
+}
+
+.terminal-btn-close {
+  background: none;
+  border: 2px solid #ffffff;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 18px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Courier New', monospace;
+  transition: all 0.2s;
+}
+
+.terminal-btn-close:hover {
+  background: #ffffff;
+  color: #ff0000;
+  transform: scale(1.1);
+}
+
+.terminal-body {
+  padding: 24px;
+  color: #ffffff;
+  background: #0a0a0a;
+  line-height: 1.6;
+}
+
+.terminal-section {
+  margin-bottom: 20px;
+  border-left: 3px solid #ff0000;
+  padding-left: 12px;
+}
+
+.terminal-label {
+  color: #ff0000;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+.terminal-url {
+  color: #cccccc;
+  font-size: 13px;
+  word-break: break-all;
+  background: #1a1a1a;
+  padding: 8px;
+  border: 1px solid #333333;
+  font-family: 'Courier New', monospace;
+}
+
+.terminal-verdict {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  padding: 10px;
+  text-align: center;
+  border: 2px solid;
+  margin-top: 8px;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.verdict-safe {
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.verdict-danger {
+  color: #ff0000;
+  border-color: #ff0000;
+  background: rgba(255, 0, 0, 0.1);
+  animation: dangerPulse 2s infinite;
+}
+
+@keyframes dangerPulse {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.8);
+  }
+}
+
+.terminal-risk {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.risk-score {
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff0000;
+  font-family: 'Courier New', monospace;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+}
+
+.risk-level {
+  padding: 4px 12px;
+  border: 2px solid;
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.risk-low {
+  color: #ffffff;
+  border-color: #ffffff;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.risk-medium {
+  color: #ffaa00;
+  border-color: #ffaa00;
+  background: rgba(255, 170, 0, 0.1);
+}
+
+.risk-high {
+  color: #ff0000;
+  border-color: #ff0000;
+  background: rgba(255, 0, 0, 0.2);
+}
+
+.terminal-confidence {
+  color: #cccccc;
+  font-size: 13px;
+  margin-top: 8px;
+  font-style: italic;
+}
+
+.terminal-reason {
+  color: #ffffff;
+  font-size: 13px;
+  margin: 8px 0;
+  padding-left: 8px;
+  line-height: 1.5;
+}
+
+.terminal-note {
+  color: #888888;
+  font-size: 11px;
+  margin-top: 16px;
+  padding: 8px;
+  border: 1px dashed #333333;
+  text-align: center;
+  font-style: italic;
+}
+
+.terminal-error {
+  color: #ff0000;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 8px;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.5);
+}
+
+.terminal-actions {
+  margin-top: 24px;
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.terminal-btn {
+  padding: 12px 24px;
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  cursor: pointer;
+  border: 2px solid;
+  background: none;
+  transition: all 0.2s;
+  text-transform: uppercase;
+}
+
+.btn-primary {
+  color: #ff0000;
+  border-color: #ff0000;
+}
+
+.btn-primary:hover {
+  background: #ff0000;
+  color: #ffffff;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  color: #ffffff;
+  border-color: #666666;
+}
+
+.btn-secondary:hover {
+  background: #666666;
+  color: #ffffff;
+  border-color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.scanner-container {
+  background: #0a0a0a;
+  padding: 16px;
+  border: 1px solid #333333;
+  margin-top: 12px;
+}
+
+.scanner-art {
+  color: #ff0000;
+  font-size: 11px;
+  line-height: 1.4;
+  text-align: center;
+  margin: 0;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  animation: scannerGlow 2s infinite;
+}
+
+@keyframes scannerGlow {
+  0%, 100% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+    text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  }
+}
+
+.terminal-status {
+  color: #ff0000;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 16px;
+  letter-spacing: 3px;
+  font-weight: bold;
+  animation: statusBlink 1.5s infinite;
+}
+
+@keyframes statusBlink {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0.3;
+  }
+}
+
+/* Scrollbar styling */
+.terminal-window::-webkit-scrollbar {
+  width: 10px;
+}
+
+.terminal-window::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border-left: 2px solid #333333;
+}
+
+.terminal-window::-webkit-scrollbar-thumb {
+  background: #ff0000;
+  border: 1px solid #0a0a0a;
+}
+
+.terminal-window::-webkit-scrollbar-thumb:hover {
+  background: #cc0000;
+}
+
+/* Scanline effect */
+.terminal-body::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    transparent 0%,
+    rgba(255, 0, 0, 0.02) 50%,
+    transparent 100%
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  animation: scanlines 8s linear infinite;
+}
+
+@keyframes scanlines {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}

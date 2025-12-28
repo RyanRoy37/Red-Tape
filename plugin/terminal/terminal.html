@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Terminal</title>
+  <link rel="stylesheet" href="terminal.css">
+</head>
+<body>
+  <!-- Terminal overlay container -->
+  <div id="retro-security-terminal" class="terminal-overlay">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <span class="terminal-title">[ SECURITY SCAN IN PROGRESS ]</span>
+        <button id="terminal-close" class="terminal-btn-close">✕</button>
+      </div>
+      
+      <div class="terminal-body">
+        <!-- URL Section -->
+        <div class="terminal-section">
+          <div class="terminal-label">TARGET</div>
+          <div class="terminal-url" id="terminal-url">Loading...</div>
+        </div>
+        
+        <!-- Status/Loading Section -->
+        <div class="terminal-section" id="loading-section">
+          <div class="scanner-container">
+            <pre class="scanner-art">
+╔════════════════════════════════════╗
+║  ANALYZING THREAT SIGNATURES...   ║
+║                                    ║
+║    ▓▓▓▓▓▓▓▓░░░░░░░░░░░░░░░░░░░    ║
+║                                    ║
+║  CHECKING DOMAIN REPUTATION...    ║
+║  VERIFYING SSL CERTIFICATES...    ║
+║  SCANNING FOR ANOMALIES...        ║
+╚════════════════════════════════════╝
+            </pre>
+          </div>
+          <div class="terminal-status">STAND BY...</div>
+        </div>
+        
+        <!-- Results Section (hidden initially) -->
+        <div id="results-section" style="display: none;">
+          <!-- Verdict -->
+          <div class="terminal-section">
+            <div class="terminal-label">VERDICT</div>
+            <div class="terminal-verdict" id="terminal-verdict">ANALYZING...</div>
+          </div>
+          
+          <!-- Risk Assessment -->
+          <div class="terminal-section">
+            <div class="terminal-label">RISK ASSESSMENT</div>
+            <div class="terminal-risk">
+              <span class="risk-score" id="risk-score">--</span>
+              <span class="risk-level" id="risk-level">UNKNOWN</span>
+            </div>
+          </div>
+          
+          <!-- Confidence -->
+          <div class="terminal-section">
+            <div class="terminal-label">CONFIDENCE</div>
+            <div class="terminal-confidence" id="terminal-confidence">--</div>
+          </div>
+          
+          <!-- Analysis/Explanations -->
+          <div class="terminal-section" id="explanations-section">
+            <div class="terminal-label">ANALYSIS</div>
+            <div id="terminal-explanations"></div>
+          </div>
+          
+          <!-- Cache note for safe sites -->
+          <div class="terminal-note" id="cache-note" style="display: none;">
+            Result cached for faster future access
+          </div>
+        </div>
+        
+        <!-- Error Section (hidden initially) -->
+        <div id="error-section" style="display: none;">
+          <div class="terminal-section">
+            <div class="terminal-label">ERROR</div>
+            <div class="terminal-error" id="error-message">SYSTEM ERROR</div>
+          </div>
+          <div class="terminal-section" id="error-details"></div>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="terminal-actions" id="terminal-actions" style="display: none;">
+          <button id="terminal-goback" class="terminal-btn btn-primary" style="display: none;">
+            GO BACK
+          </button>
+          <button id="terminal-proceed" class="terminal-btn btn-primary">
+            CONTINUE
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="terminal.js"></script>
+</body>
+</html>

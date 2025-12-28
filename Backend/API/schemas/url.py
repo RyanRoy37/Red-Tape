@@ -6,6 +6,6 @@ class URLScanRequest(BaseModel):
 
 class URLScanResponse(BaseModel):
     url: str
-    is_phishing: Optional[bool] = None
-    risk_score: Optional[float] = None  # 0.0 – 1.0 or 0 – 100
-    confidence: Optional[float] = None
+    is_phishing: bool
+    risk_score: float
+    confidence: str

@@ -1,2 +1,24 @@
 env/
 Backend/demo/.env
+.env
+# Jupyter
+*.ipynb
+.ipynb_checkpoints/
+
+# ML
+*.pkl
+*.joblib
+*.h5
+*.pt
+*.onnx
+models/
+data/
+
+# Frontend
+node_modules/
+dist/
+build/
+
+# Env
+.env
+venv/

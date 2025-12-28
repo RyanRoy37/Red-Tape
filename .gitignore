@@ -22,3 +22,16 @@ build/
 # Env
 .env
 venv/
+
+
+red_tape_env/
+
+Frontend/web_app/node_modules/
+Backend/demo/
+Backend/ML/data/
+Backend/ML/models/url_model/
+Backend/ML/feature_extractors/
+Backend/API/__pycache__/
+Backend/API/endpoints/__pycache__/
+Backend/API/evaluation/__pycache__/
+Backend/API/schema/__pycache__/

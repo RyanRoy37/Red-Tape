@@ -2,11 +2,11 @@ import pandas as pd
 import numpy as np
 import torch
 from transformers import AutoModel, AutoTokenizer
-from features import mean_pooling,Querylength, domain_token_count, path_token_count, \
+from .features import mean_pooling,Querylength, domain_token_count, path_token_count, \
     avgdomaintokenlen, longdomaintokenlen, avgpathtokenlen, charcompvowels, charcompace, ldl_url, ldl_domain, ldl_path, ldl_filename, ldl_getArg, dld_url, \
     dld_domain, dld_path, dld_filename, dld_getArg, urlLen, domainlength, pathLength, subDirLen, fileNameLen, this_fileExtLen, ArgLen, pathurlRatio, ArgUrlRatio, \
     argDomanRatio, domainUrlRatio, pathDomainRatio, argPathRatio, executable    , isPortEighty, NumberofDotsinURL, ISIpAddressInDomainName, CharacterContinuityRate, \
-    LongestVariableValue, URL_sensitiveWord, URLQueries_variable, url_shortened,email_in_url, Entropy_URL, Entropy_Domain 
+    LongestVariableValue, URL_sensitiveWord, URLQueries_variable, url_shortened,email_in_url, Entropy_URL, Entropy_Domain , tld_freq
 def extract_basic_features(url: str) -> dict:
     """
     Evaluates all basic URL features for a single URL.
@@ -31,7 +31,7 @@ def extract_basic_features(url: str) -> dict:
     ISIpAddressInDomainName, CharacterContinuityRate,
     LongestVariableValue, URL_sensitiveWord,
     URLQueries_variable, url_shortened, email_in_url,
-    Entropy_URL, Entropy_Domain
+    Entropy_URL, Entropy_Domain, tld_freq
     ]
     for feature_fn in BASIC_FEATURES:
         try:
@@ -51,8 +51,8 @@ def extract_embeddings(url: str) -> pd.DataFrame:
     BATCH_SIZE = 64          # can push higher on CPU
     DEVICE = "cpu"
 
-    tokenizer = AutoTokenizer.from_pretrained('bert-tiny')
-    model = AutoModel.from_pretrained('bert-tiny')
+    tokenizer = AutoTokenizer.from_pretrained('evaluation/bert-tiny')
+    model = AutoModel.from_pretrained('evaluation/bert-tiny')
     model.eval()
     with torch.no_grad():
         encoded = tokenizer(

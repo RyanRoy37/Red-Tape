@@ -9,6 +9,10 @@ import ssl
 import requests
 from datetime import datetime
 import math
+import joblib
+from pathlib import Path
+BASE_DIR = Path(__file__).resolve().parent
+TLD_FREQ_MAP = joblib.load(BASE_DIR / "tld_freq_map.pkl")
 
 def Querylength(url): return len(urlparse(url).query)
 
@@ -110,7 +114,17 @@ def entropy(s):
 
 def Entropy_URL(url): return entropy(url)
 def Entropy_Domain(url): return entropy(urlparse(url).netloc)
+import tldextract
 
+def extract_tld(url: str) -> str:
+    return tldextract.extract(url).suffix or "unknown"
+def tld_freq(url: str) -> float:
+    """
+    Returns the training-time frequency of the URL's TLD.
+    Unseen TLDs return 0.0
+    """
+    tld = extract_tld(url)
+    return float(TLD_FREQ_MAP.get(tld, 0.0))
 
 import pandas as pd
 import numpy as np

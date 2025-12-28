@@ -2,16 +2,19 @@
 
 from fastapi import APIRouter
 from schemas.url import URLScanRequest, URLScanResponse
+from evaluation.prediction import predict
 
 router = APIRouter()
 
 @router.post("/scan-url", response_model=URLScanResponse)
 def scan_url(payload: URLScanRequest):
-    """
-    Receives a URL from frontend and returns a placeholder response.
-    Logic will be added later.
-    """
-    return URLScanResponse(
-        url=payload.url,
-        message="URL received successfully"
+    url = str(payload.url)
+    result = predict(url)
+    response = URLScanResponse(
+        url=url,
+        is_phishing=(result["prediction"] == "phishing"),
+        risk_score=result.get("risk_score"),
+        confidence=result.get("confidence")
     )
+
+    return response

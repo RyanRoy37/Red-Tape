@@ -1,15 +1,14 @@
 import joblib
-
-def load_model(model_path: str):
-    """
-    Loads a trained sklearn-compatible model from .pkl
-    """
-    return joblib.load(model_path)
+from pathlib import Path
+def load_model():
+    BASE_DIR = Path(__file__).resolve().parent  
+    MODEL_PATH = BASE_DIR / "url_classification_model.pkl"
+    return joblib.load(MODEL_PATH)
 
 
 import numpy as np
 import pandas as pd
-from preprocessor import preprocess_url
+from evaluation.preprocessor import preprocess_url
 
 def predict(url):
     model=load_model()

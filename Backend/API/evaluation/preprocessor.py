@@ -1,4 +1,4 @@
-from feature_extractor import extract_basic_features, extract_embeddings
+from .feature_extractor import extract_basic_features, extract_embeddings
 import pandas as pd
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -6,7 +6,7 @@ import joblib
 
 
 def preprocess_url(url: str):
-    scaler = joblib.load("scaler.pkl")
+    scaler = joblib.load("evaluation/scaler.pkl")
     num_df=extract_basic_features(url)
     emb_df=extract_embeddings(url)  
     num_df = num_df.replace([np.inf, -np.inf], np.nan)

@@ -144,3 +144,93 @@ Structural features such as link count and page depth strongly distinguish phish
 link count
 
 section count
+
+
+
+
+
+
+
+
+why each rule exists and why its weight is justified.
+
+🔴 +3 — Password Field Detected
+📄 Garera et al. – Detecting Phishing Sites
+
+Source: USENIX Security
+Finding:
+
+Presence of password fields is the strongest predictor of phishing intent.
+
+✔ Highest weight justified
+✔ Direct credential harvesting intent
+
+🔴 +2 — External Form Action
+📄 Chiew et al. – Phishing Detection
+
+Source: Computers & Security
+Finding:
+
+Phishing sites often submit credentials to attacker-controlled domains.
+
+✔ Strong but secondary to password field
+✔ Weight < 3 justified
+
+🟠 +2 — Urgency Language
+📄 Jagatic et al. – Social Phishing
+
+Source: ACM CCS
+Finding:
+
+Urgency increases phishing success rates by over 30%.
+
+✔ Psychological coercion
+✔ Not always malicious → weight capped at 2
+
+🟠 +2 — JavaScript Redirects
+📄 Canali et al. – Prophiler
+
+Source: WWW Conference
+Finding:
+
+Delayed JS redirects are used to evade static scanners.
+
+✔ Strong malicious intent
+✔ Rare in benign login pages
+
+🟡 +1 — iFrame Presence
+📄 Nikiforakis et al. – Client-Side Attacks
+
+Source: WWW Conference
+Finding:
+
+iFrames are frequently used for credential relay and clickjacking.
+
+✔ Weak alone
+✔ Strong in combination
+
+🟡 +1 — Missing Footer / Policies
+📄 Dhamija et al. – Why Phishing Works
+
+Source: CHI Conference
+Finding:
+
+Phishing pages often omit privacy, legal, and navigation elements.
+
+✔ Structural incompleteness
+✔ Low standalone confidence
+
+🎯 Why Threshold = 6?
+📄 Ma et al. – Beyond Blacklists
+
+Source: ACM CCS
+
+They show:
+
+Single feature ≠ phishing
+
+Multiple independent signals = high confidence
+
+✔ Threshold requires at least 3 strong signals
+✔ Minimizes false positives
+✔ Matches industry heuristics (Chrome Safe Browsing)

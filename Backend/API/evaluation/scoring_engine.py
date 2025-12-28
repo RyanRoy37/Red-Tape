@@ -28,7 +28,8 @@ def content_scan(url: str) -> dict:
     return {
         "risk_score": content_score,
         "decision": result["decision"],
-        "confidence": result["confidence"]
+        "confidence": result["confidence"],
+        "explanations": result["explanations"]
     }
 
 

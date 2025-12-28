@@ -14,13 +14,13 @@ def scan_url(payload: URLScanRequest):
     content_result = content_scan(url)
     print(content_result["confidence"])
     print(content_result["risk_score"])
-    # 🔴 HARD OVERRIDE: content phishing beats URL heuristics
     if content_result["decision"] == "phishing":
         return URLScanResponse(
         url=url,
         is_phishing=True,
         risk_score=round(content_result["risk_score"], 2),
-        confidence=content_result["confidence"]
+        confidence=content_result["confidence"],
+        explanations=content_result.get("explanations", [])
         )
 
     # Otherwise, do weighted fusion
@@ -42,5 +42,6 @@ def scan_url(payload: URLScanRequest):
     url=url,
     is_phishing=(decision == "phishing"),
     risk_score=round(final_risk, 2),
-    confidence=confidence
+    confidence=confidence,
+    explanations=content_result.get("explanations", [])
     )

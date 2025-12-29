@@ -94,7 +94,7 @@ Verify your backend is ready:
 
 **Using curl:**
 ```bash
-curl -X POST http://localhost:4000/endpoints/scan_url \
+curl -X POST http://localhost:4000/endpoints/scan-url \
   -H "Content-Type: application/json" \
   -d '{"url": "https://google.com"}'
 ```

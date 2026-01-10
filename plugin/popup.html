@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Red-Tape Terminal</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <div class="popup-header">
+      <div class="header-line">═══════════════════════════</div>
+      <div class="header-title">RED-TAPE</div>
+      <div class="header-line">═══════════════════════════</div>
+    </div>
+    
+    <div class="popup-body">
+      <div class="status-section">
+        <div class="status-label">SYSTEM STATUS</div>
+        <div class="status-indicator" id="status-indicator">
+          <span class="status-dot"></span>
+          <span id="status-text">CHECKING...</span>
+        </div>
+      </div>
+      
+      <div class="info-section">
+        <div class="info-line">
+          <span class="info-label">MODE:</span>
+          <span class="info-value">AUTO-SCAN</span>
+        </div>
+        <div class="info-line">
+          <span class="info-label">VERSION:</span>
+          <span class="info-value">1.0.0</span>
+        </div>
+      </div>
+      
+      <div class="action-section">
+        <button id="scan-current" class="popup-btn">
+          SCAN CURRENT PAGE
+        </button>
+        <button id="open-settings" class="popup-btn btn-secondary">
+          SETTINGS
+        </button>
+      </div>
+      
+      <div class="footer-section">
+        <div class="footer-text">RED-TAPE TERMINAL v1.0</div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="popup.js"></script>
+</body>
+</html>

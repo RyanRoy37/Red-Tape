@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 env/
 Backend/demo/.env
 .env
@@ -35,3 +36,4 @@ Backend/API/__pycache__/
 Backend/API/endpoints/__pycache__/
 Backend/API/evaluation/__pycache__/
 Backend/API/schema/__pycache__/
+=======

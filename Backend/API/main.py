@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from endpoints.url_scan import router as url_scan_router
 from dotenv import load_dotenv
+from endpoints import advanced_analysis
 load_dotenv(override=True)
 
 app = FastAPI(
@@ -26,6 +27,7 @@ app.include_router(
     prefix="/endpoints",
     tags=["URL Analysis"]
 )
+app.include_router(advanced_analysis.router, prefix="/api", tags=["analysis"])
 
 from endpoints.ai_explain import router as ai_explain_router
 app.include_router(ai_explain_router, prefix="/endpoints", tags=["AI Explain"])

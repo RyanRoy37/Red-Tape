@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = ({ isOpen, onClose }) => {
   const navItems = [
-    { name: 'Red Tape', path: '/analyze' },
-    { name: 'About', path: '/about' },
-    { name: 'Features', path: '/features' }
+    { name: 'Red Tape', path: '/advanced-analysis' },
+    { name: 'Features', path: '/features' },
+    { name: 'Documentation', path: '/docs' },
   ];
 
   return (

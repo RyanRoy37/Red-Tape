@@ -22,16 +22,6 @@ const LandingPage = () => {
       description: 'Real-time protection while browsing. Automatically scans URLs and alerts you of potential threats.',
       buttonText: 'INSTALL PLUGIN'
     },
-    {
-      icon: (
-        <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-        </svg>
-      ),
-      title: 'RED BOX',
-      description: 'Sandbox for a comprehensive visual and behavioural analysis. Advanced features and detailed reports.',
-      buttonText: 'INSTALL RED BOX'
-    }
   ];
 
   return (
@@ -56,38 +46,46 @@ const LandingPage = () => {
             <span className="absolute -bottom-2 left-0 w-full h-1 bg-red-500"></span>
           </h1>
           <p className="text-xl md:text-2xl mt-6 tracking-wide opacity-80">
-            PHISHING DETECTION SYSTEM
+            PHISHING DETECTION TOOL
           </p>
         </header>
 
         {/* Main CTA */}
         <div className="text-center mb-24">
-          <Link to="/analyze">
+          <Link to="/advanced-analysis">
             <Button variant="primary" size="large">
               TRY "RED-TAPE"
             </Button>
           </Link>
         </div>
 
-        {/* Installation Options */}
-        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-          {installOptions.map((option, index) => (
-            <Card key={index} className="group">
-              <div className="mb-6">
-                <div className="w-16 h-16 border-4 border-black bg-red-500 flex items-center justify-center mb-4 group-hover:rotate-12 transition-transform duration-300">
-                  {option.icon}
-                </div>
-                <h3 className="text-2xl font-bold mb-3 tracking-wide">{option.title}</h3>
-                <p className="text-sm mb-6 leading-relaxed opacity-80">
-                  {option.description}
-                </p>
-              </div>
-              <Button variant="secondary" className="w-full">
-                {option.buttonText}
-              </Button>
-            </Card>
-          ))}
+        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+  {installOptions.map((option, index) => (
+    <Card
+      key={index}
+       className="group max-w-sm mx-auto md:col-span-2"
+    >
+      <div className="mb-6">
+        <div className="w-16 h-16 border-4 border-black bg-red-500 flex items-center justify-center mb-4 mx-auto group-hover:rotate-12 transition-transform duration-300">
+          {option.icon}
         </div>
+
+        <h3 className="text-2xl font-bold mb-3 tracking-wide text-center">
+          {option.title}
+        </h3>
+
+        <p className="text-sm mb-6 leading-relaxed opacity-80 text-center">
+          {option.description}
+        </p>
+      </div>
+
+      <Button variant="secondary" className="w-full">
+        {option.buttonText}
+      </Button>
+    </Card>
+  ))}
+</div>
+
 
         <Footer />
       </div>

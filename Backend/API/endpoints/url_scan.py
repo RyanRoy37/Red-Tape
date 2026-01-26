@@ -6,7 +6,7 @@ from evaluation.prediction import predict
 from evaluation.scoring_engine import content_scan
 router = APIRouter()
 
-@router.post("/scan-url", response_model=URLScanResponse)
+@router.post("/scan_url", response_model=URLScanResponse)
 def scan_url(payload: URLScanRequest):
     url = str(payload.url)
 

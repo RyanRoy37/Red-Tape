@@ -106,7 +106,7 @@ explainable decisions to users, aiming to enhance online safety and build digita
     <td align="center" style="padding: 15px;">
       <img src="assets/akanksha.webp" height="70" style="border-radius: 8px;" /><br/>
       <b>Akanksha Singh</b><br/>
-      <a href="https://github.com/Akanksha2121">Akanksha2121</a>
+      <a href="https://github.com/Akanksha2124">Akanksha2124</a>
     </td>
     <td align="center" style="padding: 15px;">
       <img src="assets/Minion.webp" height="70" style="border-radius: 8px;" /><br/>
@@ -119,3 +119,4 @@ explainable decisions to users, aiming to enhance online safety and build digita
 </div>
 
 ---
+
